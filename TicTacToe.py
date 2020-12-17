@@ -30,6 +30,7 @@ def play_game():
         # handle a single turn of an arbitrary player
         # current_player refers to the player whom turn it is right now and so, on the basis of this we will change the
         # turn of player with the help of flip_player.
+        # current_player is a argument.
         handle_turn(current_player)
 
         # check if game is over
@@ -51,7 +52,13 @@ def play_game():
 # Testing the handle_turn() with an example for now.
 # Handle a single turn of an arbitrary player.
 def handle_turn(player):
+    print(player + "'s turn.")
     position = input("Choose a position from 1-9 : ")
+
+    # put it in while loop so it ask again and again for valid input and not stop of after 1 or 2 time asking.
+    while position not in ["1", "2", "3", "4", "5", "6", "7", "8"]:
+        position = input("Choose a position from 1-9 : ")
+
     position = int(position) - 1
 
     board[position] = player
