@@ -66,9 +66,9 @@ def check_if_game_over():
 def check_for_winner():
     # setup global variable
     global winner
-# row_winner, column_winner , diagonal_winner all these are variables and have stored boolean values from
-# check_row() , check_column() , and check_diagonals() all these return boolean values(True,False) and store them
-# in given varibles so, that's why you can put a condition of them like (if,elif)
+    # row_winner, column_winner , diagonal_winner all these are variables and have stored boolean values from
+    # check_row() , check_column() , and check_diagonals() all these return boolean values(True,False) and store them
+    # in given varibles so, that's why you can put a condition of them like (if,elif)
     # check Rows
     row_winner = check_rows()
 
@@ -160,6 +160,12 @@ def check_diagonals():
 
 
 def check_if_tie():
+    global game_still_going
+
+    # if "-" is not in the board then the game_still_going = False (stop)
+    # means board is filled by any X or O value but it not filled by "-" so, game stops.and it's a tie.
+    if "-" not in board:
+        game_still_going = False
     return
 
 
