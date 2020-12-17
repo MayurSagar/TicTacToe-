@@ -55,11 +55,24 @@ def handle_turn(player):
     print(player + "'s turn.")
     position = input("Choose a position from 1-9 : ")
 
-    # put it in while loop so it ask again and again for valid input and not stop of after 1 or 2 time asking.
-    while position not in ["1", "2", "3", "4", "5", "6", "7", "8"]:
-        position = input("Choose a position from 1-9 : ")
+    # here, we have a boolean value running as while loop.
+    # this is made for  stoping overwriting of X and O values. again and again
+    valid = False
+    while not valid:
 
-    position = int(position) - 1
+        # put it in while loop so it ask again and again for valid input and not stop of after 1 or 2 time asking.
+        # so, user don't write Other than X and O.
+        while position not in ["1", "2", "3", "4", "5", "6", "7", "8"]:
+            position = input("Choose a position from 1-9 : ")
+
+        position = int(position) - 1
+
+        # is this board position available.if not go again. so, player don't try to overwrite the value.
+        # and if it is true than we will jump out of loop and Actually place the position (available).
+        if board[position] == "-":
+            valid = True
+        else:
+            print("you can't go there. go again.")
 
     board[position] = player
     display_board()
