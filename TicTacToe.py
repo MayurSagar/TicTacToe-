@@ -27,11 +27,14 @@ def play_game():
 
     # while the game still going
     while game_still_going:
-
         # handle a single turn of an arbitrary player
+        # current_player refers to the player whom turn it is right now and so, on the basis of this we will change the
+        # turn of player with the help of flip_player.
         handle_turn(current_player)
 
         # check if game is over
+        # we have put the check_if_gaem_over() for reason and the reason is after evry move we want see if anybody win
+        # and if not then flip the player.
         check_if_game_over()
 
         # if it's tie than flip to the other player
@@ -41,7 +44,7 @@ def play_game():
     # a for position. so take care.
     if winner == "X" or winner == "O":
         print(winner + " Won.")
-    elif winner == None :
+    elif winner == None:
         print("Tie.")
 
 
@@ -51,7 +54,7 @@ def handle_turn(player):
     position = input("Choose a position from 1-9 : ")
     position = int(position) - 1
 
-    board[position] = "X"
+    board[position] = player
     display_board()
 
 
@@ -63,7 +66,9 @@ def check_if_game_over():
 def check_for_winner():
     # setup global variable
     global winner
-
+# row_winner, column_winner , diagonal_winner all these are variables and have stored boolean values from
+# check_row() , check_column() , and check_diagonals() all these return boolean values(True,False) and store them
+# in given varibles so, that's why you can put a condition of them like (if,elif)
     # check Rows
     row_winner = check_rows()
 
@@ -94,14 +99,16 @@ def check_rows():
     global game_still_going
 
     # Check if rows has all the same values (and is not empty)
+    # these are also boolean values so, you can apply condition like (if, elif)
     row_1 = board[0] == board[1] == board[2] != "-"
     row_2 = board[3] == board[4] == board[5] != "-"
     row_3 = board[6] == board[7] == board[8] != "-"
 
     # if any row dose have a match , flag that there is a win
+    # whichever is true.
     if row_1 or row_2 or row_3:
         game_still_going = False
-        # Return the winner ( X or O )
+        # Return the winner ( X or O ) by checking every row finding which row won.
     if row_1:
         return board[0]
     elif row_2:
@@ -117,7 +124,7 @@ def check_column():
 
     # Check if column has all the same values (and is not empty)
     column_1 = board[0] == board[3] == board[6] != "-"
-    column_2 = board[1] == board[4] == board[7] != "-"                            
+    column_2 = board[1] == board[4] == board[7] != "-"
     column_3 = board[2] == board[5] == board[8] != "-"
 
     # if any column dose have a match , flag that there is a win
@@ -142,7 +149,7 @@ def check_diagonals():
     diagonals_2 = board[6] == board[4] == board[2] != "-"
 
     # if any diagonals dose have a match , flag that there is a win
-    if diagonals_1 or diagonals_2  :
+    if diagonals_1 or diagonals_2:
         game_still_going = False
         # Return the winner ( X or O )
     if diagonals_1:
@@ -151,10 +158,22 @@ def check_diagonals():
         return board[6]
     return
 
+
 def check_if_tie():
     return
 
+
 def flip_player():
+    # global variable we need for use.
+    global current_player
+
+    # if current_player was X then change it O
+    if current_player == "X":
+        current_player = "O"
+
+    # if current_player was O then change it to X
+    elif current_player == "O":
+        current_player = "X"
     return
 
 
